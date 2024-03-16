@@ -10117,3 +10117,9 @@ section.resume-section .resume-section-content {
     padding-bottom: 5rem;
   }
 }
+
+.education-container{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
