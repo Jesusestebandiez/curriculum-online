@@ -10118,7 +10118,7 @@ section.resume-section .resume-section-content {
   }
 }
 
-.education-container{
+.education-container {
   display: flex;
   flex-direction: column;
   gap: 2rem;

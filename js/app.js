@@ -1,89 +1,93 @@
-function cambiarPagina(opcion)
+'use strict'
+
+import { EDUCATION } from './models/education.js';
+import { EXPERIENCE } from './models/experience.js';
+import { HABILITIES } from './models/habilities.js';
+
+function insertEducation()
 {
-	document.getElementById("inicio").style.display="none";
-	document.getElementById("coches").style.display="none";
-	document.getElementById("motores").style.display="none";
-	document.getElementById("rendimiento").style.display="none";
-	document.getElementById("llantas-y-neumaticos").style.display="none";
-	document.getElementById("asientos").style.display="none";
-	document.getElementById("tuning").style.display="none";
-	document.getElementById("carrocerias").style.display="none";
-	document.getElementById("interiores").style.display="none";
-	document.getElementById("resturaciones").style.display="none";
-	document.getElementById("contacto").style.display="none";
-	document.getElementById("formulario").style.display="none";
-	document.getElementById("ayuda").style.display="none";
+	EDUCATION.forEach(({title, subtitle, duration}) => {
+		let container = document.getElementsByClassName("education-container")[0];
+		let firstDiv = document.createElement("div");
+		let secondDiv = document.createElement("div");
+		let h3 = document.createElement("h3");
+		let subheading = document.createElement("div");
+		let durationDiv = document.createElement("div");
+		let durationSpan = document.createElement("span");
 
-	/*var opcion="inicio";*/
-	var titulo="";
-	
-	switch(opcion)
-	{
-		case "inicio":
-			titulo="FAST CARS DIEZ";
-			break;
-		case "coches":
-			titulo="Coches";
-			break;
-		case "motores":
-			titulo="Motores";
-			break;
-		case "rendimiento":
-			titulo="Rendimiento";
-			break;
-		case "llantas-y-neumamticos":
-			titulo="LLantas y Neumamticos";
-			break;
-		case "asientos":
-			titulo="Asientos";
-			break;
-		case "tuning":
-			titulo="Tuning";
-			break;
-		case "carrocerias":
-			titulo="Carrocerias";
-			break;
-		case "interiores":
-			titulo="Interiores";
-			break;
-		case"resturaciones":
-			titulo="Resturaciones";
-			break;
-		case "contaco":
-			titulo="Contaco";
-			break;
-		case "formulario":
-			titulo="Formulario";
-			break;
-		case "ayuda":
-			titulo="Ayuda";
-			break;	
-
-	}
-
-	document.getElementById("titulo").innerHTML=titulo;
-	document.getElementById(opcion).style.display="initial";
-
+		firstDiv.setAttribute("class","d-flex flex-column");
+		secondDiv.setAttribute("class","d-flex-grow-1");
+		h3.setAttribute("class","mb-0");
+		subheading.setAttribute("class","subheading mb-3");
+		durationDiv.setAttribute("class","flex-shrink-0");
+		durationSpan.setAttribute("class","text-primary");
+		
+		h3.innerHTML = title;
+		subheading.innerHTML = subtitle;
+		durationSpan.innerHTML = duration;
+		
+		durationDiv.appendChild(durationSpan);
+		secondDiv.appendChild(h3);
+		secondDiv.appendChild(subheading);
+		firstDiv.appendChild(secondDiv);
+		firstDiv.appendChild(durationDiv);
+		container.appendChild(firstDiv);
+	});
 }
 
- var slideIndex = 1;
-showDivs(slideIndex);
+function insertExperience()
+{
+	EXPERIENCE.forEach(({title, subtitle, duration, desc}) => {
+		let container = document.getElementById("experience-content");
+		let content = document.createElement("div");
+		let firstChild = document.createElement("div");
+		let h3 = document.createElement("h3");
+		let subheading = document.createElement("div");
+		let description = document.createElement("p");
+		let durationDiv = document.createElement("div");
+		let durationSpan = document.createElement("span");
 
-function plusDivs(n) {
-  showDivs(slideIndex += n);
+		content.setAttribute("class","d-flex flex-column flex-md-row justify-content-between mb-5");
+		firstChild.setAttribute("class","d-flex-grow-1");
+		h3.setAttribute("class","mb-0");
+		subheading.setAttribute("class","subheading mb-3");
+		durationDiv.setAttribute("class","flex-shrink-0");
+		durationSpan.setAttribute("class","text-primary");
+		
+		h3.innerHTML = title;
+		subheading.innerHTML = subtitle;
+		description.innerHTML = desc;
+		durationSpan.innerHTML = duration;
+		
+		firstChild.appendChild(h3);
+		firstChild.appendChild(subheading);
+		firstChild.appendChild(description);
+		durationDiv.appendChild(durationSpan);
+		content.appendChild(firstChild);
+		content.appendChild(durationDiv);
+		container.appendChild(content);
+	});
 }
 
-function showDivs(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  if (n > x.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = x.length}
-  for (i = 0; i < x.length; i++) {
-     x[i].style.display = "none";  
-  }
-  x[slideIndex-1].style.display = "block";  
-}
-cambiarPagina("inicio");
+function insertHabilities()
+{
+	HABILITIES.forEach((hability) => {
+		let container = document.getElementById("hablities-list");
+		let content = document.createElement("li");
+		let span = document.createElement("span");
+		let i = document.createElement("i");
 
-/*document.getElementById("cookies").innerHTML =
-"navigator.cookieEnabled is " + navigator.cookieEnabled;*/
+		span.setAttribute("class","fa-li");
+		i.setAttribute("class","fas fa-check");
+		span.appendChild(i);
+		content.appendChild(span);
+		content.append(hability);
+		
+		container.appendChild(content);
+	});
+}
+
+//main
+insertEducation();
+insertExperience();
+insertHabilities();
